@@ -31,7 +31,7 @@ export default function FloatingContact() {
 
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-green-600 text-white shadow-lg transition-transform hover:scale-105 hover:bg-green-700"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-green-600 text-white shadow-lg transition-transform hover:scale-105 hover:bg-green-700 animate-bounce-subtle"
       >
         <Phone className="h-6 w-6" />
       </button>
