@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import GoogleAnalytics from "@/components/google-analytics"
+import { Suspense } from "react"
 
 // Load Roboto font for the entire website
 const roboto = Roboto({
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
   description:
     "Rmili & Associés est l'Expert Comptable et le Conseiller privilégié des chefs d'entreprise qui ont avant tout besoin de conseil de réactivité et d'outils de gestion simples et efficaces",
   keywords: "Expert Comptable, Expertise Comptable, Commissariat aux Comptes, Fiscalité, Juridique",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -33,12 +33,11 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
       </body>
     </html>
   )
 }
 
-
-
-import './globals.css'
