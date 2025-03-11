@@ -7,10 +7,12 @@ import BrandsSection from "@/components/brands-section"
 import SocialSection from "@/components/social-section"
 import SiteFooter from "@/components/site-footer"
 import FloatingContact from "@/components/floating-contact"
+import MobileHeightFix from "@/components/mobile-height-fix"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
+      <MobileHeightFix />
       <div className="relative">
         <SiteHeader />
         <HeroCarousel />

@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ChevronDown, ChevronRight } from "lucide-react"
+import { Menu, ChevronDown, ChevronRight } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -99,13 +99,13 @@ export default function SiteHeader() {
           {/* Logo - Left */}
           <div className="flex justify-start">
             <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
-              <Image
-                src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
-                alt="Cabinet Rmili & Associés"
-                width={200}
-                height={60}
-                className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
-              />
+                <Image
+                  src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
+                  alt="Cabinet Rmili & Associés"
+                  width={200}
+                  height={60}
+                  className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
+                />
             </Link>
           </div>
 
@@ -215,7 +215,7 @@ export default function SiteHeader() {
                   Devis Gratuit
                   <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
-                <span
+                <span 
                   className={cn(
                     "absolute inset-0 w-full h-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500",
                     scrolled ? "bg-[#cca234]" : "bg-[#233b5d]",
@@ -332,9 +332,7 @@ export default function SiteHeader() {
                     <Link href="/devis" onClick={() => setIsOpen(false)}>
                       <span className="relative z-10 flex items-center justify-center">
                         Devis Gratuit
-                        <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
-                          →
-                        </span>
+                        <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
                       </span>
                       <span className="absolute inset-0 w-full h-full bg-[#cca234] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
                     </Link>
@@ -348,4 +346,3 @@ export default function SiteHeader() {
     </header>
   )
 }
-

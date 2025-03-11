@@ -73,6 +73,12 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-roboto);
+    /* Fix for mobile browsers */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  html {
+    height: -webkit-fill-available;
   }
   h1,
   h2,
@@ -122,5 +128,11 @@
   .animate-ping {
     animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
+}
+
+/* Fix for mobile viewport height */
+.mobile-full-height {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 

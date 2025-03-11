@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description:
     "Rmili & Associés est l'Expert Comptable et le Conseiller privilégié des chefs d'entreprise qui ont avant tout besoin de conseil de réactivité et d'outils de gestion simples et efficaces",
   keywords: "Expert Comptable, Expertise Comptable, Commissariat aux Comptes, Fiscalité, Juridique",
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
 }
 
 export default function RootLayout({

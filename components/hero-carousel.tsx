@@ -38,7 +38,29 @@ export default function HeroCarousel() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [displayedEmphasis, setDisplayedEmphasis] = useState("")
   const [isTyping, setIsTyping] = useState(true)
+  const [viewportHeight, setViewportHeight] = useState("100vh")
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  // Handle mobile viewport height
+  useEffect(() => {
+    const setHeight = () => {
+      // Use window.innerHeight to get the actual visible viewport height
+      setViewportHeight(`${window.innerHeight}px`)
+    }
+
+    // Set initial height
+    setHeight()
+
+    // Update height on resize and orientation change
+    window.addEventListener('resize', setHeight)
+    window.addEventListener('orientationchange', setHeight)
+
+    return () => {
+      window.removeEventListener('resize', setHeight)
+      window.removeEventListener('orientationchange', setHeight)
+    }
+  }, [])
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -103,7 +125,11 @@ export default function HeroCarousel() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div 
+      ref={heroRef}
+      className="relative w-full overflow-hidden" 
+      style={{ height: viewportHeight }}
+    >
       <div
         className="h-full flex transition-transform duration-1000 ease-out"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -165,9 +191,7 @@ export default function HeroCarousel() {
                             <Link href="/contact">
                               <span className="relative z-10 flex items-center">
                                 Nous contacter
-                                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
-                                  →
-                                </span>
+                                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
                               </span>
                               <span className="absolute inset-0 w-full h-full bg-[#233b5d] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
                             </Link>
@@ -208,4 +232,3 @@ export default function HeroCarousel() {
     </div>
   )
 }
-
