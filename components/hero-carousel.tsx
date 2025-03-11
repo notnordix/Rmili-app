@@ -14,19 +14,19 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "https://www.cabinetrmili.ma/assets/media/components/b-main-slider/bg-2.jpg?height=850&width=1920",
+    image: "/DSC02242-2.jpg?height=850&width=1920",
     title: "Le Partenaire privilégié",
     titleEmphasis: "de votre entreprise",
     info: "Cabinet RMILI & Associés",
   },
   {
-    image: "https://www.cabinetrmili.ma/assets/media/components/b-main-slider/bg-12.jpg?height=850&width=1920",
+    image: "/DSC02259.jpg?height=850&width=1920",
     title: "Premier rendez-vous",
     titleEmphasis: "gratuit",
     info: "avec un expert comptable pour l'état des lieux comptable, fiscal et social de votre société.",
   },
   {
-    image: "https://www.cabinetrmili.ma/assets/media/components/b-main-slider/bg-4442.jpg?height=850&width=1920",
+    image: "/DSC02287.jpg?height=850&width=1920",
     title: "14 ans",
     titleEmphasis: "d'expérience",
     info: "6 ans auprés de cabinets internationaux",
