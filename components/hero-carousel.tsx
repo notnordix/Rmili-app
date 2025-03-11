@@ -165,12 +165,6 @@ export default function HeroCarousel() {
                           {slide.title}{" "}
                           <span className="text-[#cca234] inline-block relative">
                             {displayedEmphasis}
-                            <span
-                              className="animate-pulse absolute -right-2 top-0 h-full w-0.5 bg-[#cca234]"
-                              style={{
-                                opacity: displayedEmphasis.length === (slide.titleEmphasis || "").length ? 0 : 1,
-                              }}
-                            ></span>
                           </span>
                         </h2>
                         <div
