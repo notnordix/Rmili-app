@@ -1,15 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
-import { Play } from "lucide-react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
 import AnimatedBackground from "@/components/animated-background"
 import { motion } from "framer-motion"
 
 export default function PartnerSection() {
-  const [videoOpen, setVideoOpen] = useState(false)
-
   return (
     <section className="py-14 bg-white relative overflow-hidden">
       {/* Animated background */}
@@ -40,21 +35,13 @@ export default function PartnerSection() {
             <div className="relative">
               <div className="relative z-10">
                 <Image
-                  src="/rmili.jpg?height=300&width=300"
+                  src="/189892.png?height=300&width=300"
                   alt="Meriem RMILI"
                   width={240}
                   height={240}
                   className="rounded-full border-4 border-[#cca234] shadow-md w-48 h-48 object-cover"
                 />
               </div>
-
-              <button
-                onClick={() => setVideoOpen(true)}
-                className="absolute -bottom-4 -right-4 bg-[#233b5d] hover:bg-[#1a2d49] text-white rounded-full p-4 shadow-md transform transition-all duration-300 hover:scale-110 z-20"
-              >
-                <Play className="h-6 w-6" />
-                <span className="sr-only">Lire mot du président</span>
-              </button>
             </div>
           </motion.div>
 
@@ -78,23 +65,6 @@ export default function PartnerSection() {
           </motion.div>
         </div>
       </div>
-
-      <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
-        <DialogContent className="max-w-4xl p-0 bg-black">
-          <div className="aspect-video w-full">
-            <iframe
-              width="100%"
-              height="100%"
-              src="/preentation.mp4" // Replace with actual video URL when available
-              title="Mot du président"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   )
 }

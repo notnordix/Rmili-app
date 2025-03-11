@@ -36,7 +36,7 @@ export default function AboutSection() {
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-md">
                 <Image
-                  src="/ac.jpg?height=500&width=700"
+                  src="/DSC02242.jpg?height=500&width=700"
                   alt="Cabinet Rmili & Associés"
                   width={700}
                   height={500}
