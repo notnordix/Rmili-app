@@ -1,16 +1,37 @@
+"use client"
+
 import { Quote } from "lucide-react"
+import AnimatedBackground from "@/components/animated-background"
+import { motion } from "framer-motion"
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-14 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-14 bg-white relative overflow-hidden">
+      {/* Animated background */}
+      <AnimatedBackground />
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <div className="h-1 w-12 bg-[#cca234] mx-auto mb-6"></div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#233b5d]">Témoignage client</h2>
+            <motion.h2
+              className="text-2xl md:text-3xl font-bold text-[#233b5d]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Témoignage client
+            </motion.h2>
           </div>
 
-          <div className="relative bg-gray-50/50 rounded-lg p-8 md:p-10">
+          <motion.div
+            className="relative bg-white/80 backdrop-blur-sm rounded-lg p-8 md:p-10 shadow-md"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <Quote className="absolute top-6 left-6 text-[#cca234]/10 h-12 w-12" />
 
             <div className="text-center relative z-10">
@@ -28,7 +49,7 @@ export default function TestimonialsSection() {
                 <p className="text-gray-400 text-xs mt-1">15 juin 2015</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

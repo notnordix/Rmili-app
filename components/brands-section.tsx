@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react"
 import Image from "next/image"
+import AnimatedBackground from "@/components/animated-background"
 
 const brands = [
   { name: "Université Al Akhawayn", image: "/akhawayn.png?height=80&width=150" },
@@ -51,8 +52,11 @@ export default function BrandsSection() {
   }, [])
 
   return (
-    <section className="py-14 bg-white">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section className="py-14 bg-white relative overflow-hidden">
+      {/* Animated background */}
+      <AnimatedBackground />
+
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         <div className="text-center mb-10">
           <div className="h-1 w-12 bg-[#cca234] mx-auto mb-6"></div>
           <h2 className="text-2xl md:text-3xl font-bold text-[#233b5d]">Nos clients de confiance</h2>

@@ -1,19 +1,38 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import AnimatedBackground from "@/components/animated-background"
+import { motion } from "framer-motion"
 
 export default function AboutSection() {
   return (
-    <section className="py-14 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="py-14 bg-white relative overflow-hidden">
+      {/* Animated background */}
+      <AnimatedBackground />
+      
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center mb-10">
           <div className="h-1 w-12 bg-[#cca234] mx-auto mb-6"></div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#233b5d]">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold text-[#233b5d]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             Cabinet Rmili & Associés, l&apos;Expert Comptable privilégié des chefs d&apos;entreprise
-          </h2>
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 order-2 lg:order-1">
+          <motion.div 
+            className="lg:col-span-7 order-2 lg:order-1"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-md">
                 <Image
@@ -27,10 +46,16 @@ export default function AboutSection() {
               <div className="absolute -left-3 -bottom-3 w-24 h-24 border-l-4 border-b-4 border-[#cca234] rounded-bl-xl z-0"></div>
               <div className="absolute -right-3 -top-3 w-24 h-24 border-r-4 border-t-4 border-[#233b5d] rounded-tr-xl z-0"></div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-5 order-1 lg:order-2">
-            <div className="bg-gray-50/50 p-6 md:p-8 rounded-lg">
+          <motion.div 
+            className="lg:col-span-5 order-1 lg:order-2"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-md">
               <p className="text-gray-700 mb-6 leading-relaxed">
                 Avec son équipe expérimentée, le Cabinet Rmili & Associés est l&apos;
                 <Link
@@ -69,10 +94,9 @@ export default function AboutSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
-

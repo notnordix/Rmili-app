@@ -4,20 +4,39 @@ import { useState } from "react"
 import Image from "next/image"
 import { Play } from "lucide-react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+import AnimatedBackground from "@/components/animated-background"
+import { motion } from "framer-motion"
 
 export default function PartnerSection() {
   const [videoOpen, setVideoOpen] = useState(false)
 
   return (
-    <section className="py-14 bg-white">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section className="py-14 bg-white relative overflow-hidden">
+      {/* Animated background */}
+      <AnimatedBackground />
+
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         <div className="text-center mb-10">
           <div className="h-1 w-12 bg-[#cca234] mx-auto mb-6"></div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#233b5d]">Mot Du Partner Manager</h2>
+          <motion.h2
+            className="text-2xl md:text-3xl font-bold text-[#233b5d]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Mot Du Partner Manager
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-4 flex justify-center">
+          <motion.div
+            className="md:col-span-4 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="relative">
               <div className="relative z-10">
                 <Image
@@ -37,10 +56,16 @@ export default function PartnerSection() {
                 <span className="sr-only">Lire mot du président</span>
               </button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="md:col-span-8">
-            <div className="bg-gray-50/50 p-6 md:p-8 rounded-lg">
+          <motion.div
+            className="md:col-span-8"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-md">
               <p className="text-gray-700 leading-relaxed">
                 Meriem RMILI, diplômée d&apos;<strong>expertise comptable</strong> et{" "}
                 <strong>commissariat aux comptes</strong> en France, et disposant de 14 années d&apos;expériences dont
@@ -50,7 +75,7 @@ export default function PartnerSection() {
                 <span className="inline-block h-0.5 w-12 bg-[#cca234]"></span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

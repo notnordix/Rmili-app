@@ -99,13 +99,13 @@ export default function SiteHeader() {
           {/* Logo - Left */}
           <div className="flex justify-start">
             <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
-                <Image
-                  src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
-                  alt="Cabinet Rmili & Associés"
-                  width={200}
-                  height={60}
-                  className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
-                />
+              <Image
+                src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
+                alt="Cabinet Rmili & Associés"
+                width={200}
+                height={60}
+                className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
+              />
             </Link>
           </div>
 
@@ -206,15 +206,18 @@ export default function SiteHeader() {
             <Button
               asChild
               className={cn(
-                "font-medium transition-all duration-300 relative overflow-hidden group",
-                scrolled ? "bg-[#233b5d] hover:bg-[#cca234]" : "bg-[#cca234] hover:bg-[#233b5d]",
+                "font-medium transition-all duration-300 relative overflow-hidden group shadow-md hover:shadow-lg",
+                scrolled ? "bg-[#233b5d]" : "bg-[#cca234]",
               )}
             >
               <Link href="/devis">
-                <span className="relative z-10">Devis Gratuit</span>
+                <span className="relative z-10 flex items-center">
+                  Devis Gratuit
+                  <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
                 <span
                   className={cn(
-                    "absolute inset-0 w-full h-full transition-all duration-300 transform translate-y-full group-hover:translate-y-0",
+                    "absolute inset-0 w-full h-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500",
                     scrolled ? "bg-[#cca234]" : "bg-[#233b5d]",
                   )}
                 ></span>
@@ -227,7 +230,6 @@ export default function SiteHeader() {
         <div className="flex lg:hidden items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
-            <div className={cn("relative", !scrolled && "bg-white/90 p-2 rounded-lg shadow-md")}>
               <Image
                 src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
                 alt="Cabinet Rmili & Associés"
@@ -235,7 +237,6 @@ export default function SiteHeader() {
                 height={60}
                 className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
               />
-            </div>
           </Link>
 
           {/* Mobile Menu Button */}
@@ -326,11 +327,16 @@ export default function SiteHeader() {
                 <div className="p-4 border-t">
                   <Button
                     asChild
-                    className="w-full bg-[#233b5d] hover:bg-[#1a2d49] transition-all duration-300 relative overflow-hidden group"
+                    className="w-full bg-[#233b5d] text-white transition-all duration-300 relative overflow-hidden group shadow-md hover:shadow-lg"
                   >
                     <Link href="/devis" onClick={() => setIsOpen(false)}>
-                      <span className="relative z-10">Devis Gratuit</span>
-                      <span className="absolute inset-0 w-full h-full transition-all duration-300 transform translate-y-full group-hover:translate-y-0 bg-[#1a2d49]"></span>
+                      <span className="relative z-10 flex items-center justify-center">
+                        Devis Gratuit
+                        <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+                          →
+                        </span>
+                      </span>
+                      <span className="absolute inset-0 w-full h-full bg-[#cca234] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
                     </Link>
                   </Button>
                 </div>

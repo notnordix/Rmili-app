@@ -160,9 +160,17 @@ export default function HeroCarousel() {
                         >
                           <Button
                             asChild
-                            className="bg-[#cca234] hover:bg-[#b89230] text-white px-8 py-6 text-base font-medium rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
+                            className="bg-[#cca234] hover:bg-[#b89230] text-white px-8 py-6 text-base font-medium rounded-md shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
                           >
-                            <Link href="/contact">Nous contacter</Link>
+                            <Link href="/contact">
+                              <span className="relative z-10 flex items-center">
+                                Nous contacter
+                                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+                                  →
+                                </span>
+                              </span>
+                              <span className="absolute inset-0 w-full h-full bg-[#233b5d] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
+                            </Link>
                           </Button>
                         </div>
                       </>
@@ -181,7 +189,9 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className="group relative h-3 w-16 overflow-hidden rounded-full bg-white/30"
+            className={`group relative h-3 w-16 overflow-hidden rounded-full ${
+              index === activeIndex ? "bg-white/50" : "bg-white/20 hover:bg-white/30"
+            }`}
           >
             <span className="sr-only">Go to slide {index + 1}</span>
             {index === activeIndex && (
