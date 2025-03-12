@@ -65,7 +65,7 @@ export default function JuridiquePage() {
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/juridique.jpg?height=500&width=700"
+                  src="/880x814_1.jpg?height=500&width=700"
                   alt="Juridique"
                   width={600}
                   height={400}
