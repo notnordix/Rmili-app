@@ -57,7 +57,7 @@ export default function SocialSection() {
 
                   {/* Main button */}
                   <div
-                    className="flex flex-col items-center relative z-10 py-5 px-16 rounded-full shadow-lg transition-all duration-500 group-hover:shadow-xl"
+                    className="flex flex-col items-center relative z-10 py-4 px-10 rounded-full shadow-lg transition-all duration-500 group-hover:shadow-xl"
                     style={{ backgroundColor: social.color }}
                   >
                     <div className="text-white mb-1 transform transition-transform duration-300 group-hover:scale-110">

@@ -41,10 +41,35 @@ export default function ApplicationForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileType: "cv" | "coverLetter") => {
     if (e.target.files && e.target.files[0]) {
+      // Check file size (5MB max)
+      const file = e.target.files[0]
+      const maxSize = 5 * 1024 * 1024 // 5MB
+
+      if (file.size > maxSize) {
+        setSubmitStatus({
+          success: false,
+          message: `La taille du fichier ne doit pas dépasser 5MB.`,
+        })
+
+        // Reset the file input
+        if (fileType === "cv" && cvInputRef.current) {
+          cvInputRef.current.value = ""
+        } else if (fileType === "coverLetter" && coverLetterInputRef.current) {
+          coverLetterInputRef.current.value = ""
+        }
+
+        return
+      }
+
       setFiles((prev) => ({
         ...prev,
-        [fileType]: e.target.files![0],
+        [fileType]: file,
       }))
+
+      // Clear any previous error messages
+      if (submitStatus && !submitStatus.success) {
+        setSubmitStatus(null)
+      }
     }
   }
 
@@ -77,50 +102,64 @@ export default function ApplicationForm() {
     setIsSubmitting(true)
     setSubmitStatus(null)
 
-    // Simulate form submission
     try {
-      // In a real implementation, you would send the form data and files to your backend
-      // using FormData to handle the file uploads
-      // const formDataToSend = new FormData()
-      // Object.entries(formData).forEach(([key, value]) => {
-      //   formDataToSend.append(key, value)
-      // })
-      // if (files.cv) formDataToSend.append('cv', files.cv)
-      // if (files.coverLetter) formDataToSend.append('coverLetter', files.coverLetter)
-      //
-      // await fetch('/api/apply', {
-      //   method: 'POST',
-      //   body: formDataToSend
-      // })
+      // Create FormData object to send files and form data
+      const formDataToSend = new FormData()
 
-      // Simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // Success response
-      setSubmitStatus({
-        success: true,
-        message: "Votre candidature a été envoyée avec succès. Nous l'examinerons et vous contacterons bientôt.",
+      // Add form fields
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value)
       })
 
-      // Reset form
-      setFormData({
-        title: formData.title,
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        position: "",
-        message: "",
+      // Add files
+      if (files.cv) formDataToSend.append("cv", files.cv)
+      if (files.coverLetter) formDataToSend.append("coverLetter", files.coverLetter)
+
+      // Send the form data to the API
+      const response = await fetch("/api/apply", {
+        method: "POST",
+        body: formDataToSend,
       })
 
-      setFiles({
-        cv: null,
-        coverLetter: null,
-      })
+      const result = await response.json()
 
-      if (cvInputRef.current) cvInputRef.current.value = ""
-      if (coverLetterInputRef.current) coverLetterInputRef.current.value = ""
+      if (response.ok) {
+        // Success response
+        setSubmitStatus({
+          success: true,
+          message:
+            result.message ||
+            "Votre candidature a été envoyée avec succès. Nous l'examinerons et vous contacterons bientôt.",
+        })
+
+        // Reset form
+        setFormData({
+          title: formData.title,
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          position: "",
+          message: "",
+        })
+
+        setFiles({
+          cv: null,
+          coverLetter: null,
+        })
+
+        if (cvInputRef.current) cvInputRef.current.value = ""
+        if (coverLetterInputRef.current) coverLetterInputRef.current.value = ""
+      } else {
+        // Error response
+        setSubmitStatus({
+          success: false,
+          message:
+            result.message || "Une erreur s'est produite lors de l'envoi de votre candidature. Veuillez réessayer.",
+        })
+      }
     } catch (error) {
+      console.error("Error submitting application:", error)
       // Error response
       setSubmitStatus({
         success: false,
@@ -241,7 +280,7 @@ export default function ApplicationForm() {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           CV (PDF, DOC, DOCX) <span className="text-red-500">*</span>
         </label>
-        <div className="mt-1">
+        <div className="mt-1 relative">
           {!files.cv ? (
             <div className="border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center">
               <Upload className="h-8 w-8 text-gray-400 mb-2" />
@@ -278,7 +317,7 @@ export default function ApplicationForm() {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Lettre de motivation (PDF, DOC, DOCX) <span className="text-gray-500 text-xs font-normal">(optionnel)</span>
         </label>
-        <div className="mt-1">
+        <div className="mt-1 relative">
           {!files.coverLetter ? (
             <div className="border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center">
               <Upload className="h-8 w-8 text-gray-400 mb-2" />
