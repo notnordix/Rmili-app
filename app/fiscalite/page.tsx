@@ -76,7 +76,7 @@ export default function FiscalitePage() {
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/fiscalite.jpg?height=500&width=700"
+                  src="/880x814_1.jpg?height=500&width=700"
                   alt="Fiscalité"
                   width={600}
                   height={400}
