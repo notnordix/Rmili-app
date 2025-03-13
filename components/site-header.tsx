@@ -95,9 +95,9 @@ export default function SiteHeader() {
     >
       <div className="container mx-auto px-4">
         {/* Desktop Layout - True centered navigation with expanded width */}
-        <div className="hidden lg:grid grid-cols-3 items-center">
+        <div className="hidden lg:grid grid-cols-12 items-center gap-4">
           {/* Logo - Left */}
-          <div className="flex justify-start">
+          <div className="col-span-2 flex justify-center items-center">
             <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
               <Image
                 src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
@@ -110,8 +110,8 @@ export default function SiteHeader() {
           </div>
 
           {/* Navigation - Center */}
-          <div className="flex justify-center">
-            <nav className="flex items-center justify-center min-w-[600px]">
+          <div className="col-span-6 flex justify-center">
+            <nav className="flex items-center justify-center w-full">
               {navItems.map((item) => (
                 <div
                   key={item.name}
@@ -186,7 +186,7 @@ export default function SiteHeader() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center px-6 py-2 text-sm font-medium transition-all duration-200 relative whitespace-nowrap",
+                        "flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 relative whitespace-nowrap",
                         !scrolled ? "text-white" : "text-gray-800",
                       )}
                     >
@@ -201,8 +201,8 @@ export default function SiteHeader() {
             </nav>
           </div>
 
-          {/* Button and Image - Right */}
-          <div className="flex justify-end items-center space-x-4">
+          {/* Button - Right */}
+          <div className="col-span-2 flex justify-end items-center">
             <Button
               asChild
               className={cn(
@@ -223,6 +223,10 @@ export default function SiteHeader() {
                 ></span>
               </Link>
             </Button>
+          </div>
+
+          {/* OEC Image - Far Right */}
+          <div className="col-span-2 flex justify-center items-center">
             <div className="relative transition-all duration-300">
               <Image
                 src={scrolled ? "/oecmaroc.png" : "/oecmaroc.png"}
