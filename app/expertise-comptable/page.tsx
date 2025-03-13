@@ -70,7 +70,7 @@ export default function ExpertiseComptablePage() {
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/880x814_1.jpg?height=500&width=700"
+                  src="/expertise-comptable.jpg?height=500&width=700"
                   alt="Expertise Comptable"
                   width={600}
                   height={400}

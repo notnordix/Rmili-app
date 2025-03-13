@@ -16,7 +16,7 @@ export default function AuditLegalPage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="pt-24 relative bg-[#233b5d]/60 text-white">
+      <section className="pt-24 relative bg-[#233b5d] text-white">
         <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/bg-1.jpg?height=600&width=1920"
@@ -25,6 +25,7 @@ export default function AuditLegalPage() {
             className="object-cover opacity-20"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#233b5d]/80 to-[#233b5d]"></div>
         </div>
 
         <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
@@ -74,7 +75,7 @@ export default function AuditLegalPage() {
             <div className="relative">
               <div className="relative z-10 overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/880x814_1.jpg?height=500&width=700"
+                  src="/audit-legal.jpg?height=500&width=700"
                   alt="Audit Legal et Contractuel"
                   width={600}
                   height={400}

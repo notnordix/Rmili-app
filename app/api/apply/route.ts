@@ -3,6 +3,7 @@ import { writeFile } from "fs/promises"
 import { join } from "path"
 import { mkdir } from "fs/promises"
 import { ensureUploadsDir } from "@/middleware/ensure-uploads-dir"
+import { query } from "@/lib/db"
 
 // Set the maximum file size (5MB)
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
@@ -69,42 +70,52 @@ export async function POST(request: NextRequest) {
     }
 
     // Save the CV file
+    let cvPath = ""
     if (cv) {
       const cvBytes = await cv.arrayBuffer()
       const cvBuffer = Buffer.from(cvBytes)
-      const cvPath = join(uploadDir, cv.name)
+      cvPath = join(uploadDir, cv.name)
       await writeFile(cvPath, cvBuffer)
     }
 
     // Save the cover letter file if provided
+    let coverLetterPath = ""
     if (coverLetter) {
       const coverLetterBytes = await coverLetter.arrayBuffer()
       const coverLetterBuffer = Buffer.from(coverLetterBytes)
-      const coverLetterPath = join(uploadDir, coverLetter.name)
+      coverLetterPath = join(uploadDir, coverLetter.name)
       await writeFile(coverLetterPath, coverLetterBuffer)
     }
 
-    // Save application data (in a real app, you would store this in a database)
-    const applicationData = {
-      title,
-      firstName,
-      lastName,
-      email,
-      phone,
-      position,
-      message,
-      cvFilename: cv ? cv.name : null,
-      coverLetterFilename: coverLetter ? coverLetter.name : null,
-      submittedAt: new Date().toISOString(),
+    // Insert application into database
+    const result = await query<any>(
+      `INSERT INTO applications 
+       (title, first_name, last_name, email, phone, position, message, 
+        cv_filename, cv_path, cover_letter_filename, cover_letter_path) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        title,
+        firstName,
+        lastName,
+        email,
+        phone,
+        position,
+        message || "",
+        cv ? cv.name : "",
+        cvPath,
+        coverLetter ? coverLetter.name : null,
+        coverLetterPath || null,
+      ],
+    )
+
+    // Log activity
+    if (result.insertId) {
+      await query(
+        `INSERT INTO activity_log (action_type, entity_type, entity_id, action_details) 
+         VALUES (?, ?, ?, ?)`,
+        ["create", "application", result.insertId, "New job application submitted"],
+      )
     }
-
-    // Write application data to a JSON file
-    await writeFile(join(uploadDir, "application-data.json"), JSON.stringify(applicationData, null, 2))
-
-    // In a real application, you would:
-    // 1. Store the files in a cloud storage service like AWS S3
-    // 2. Save the application data in a database
-    // 3. Send notification emails to the HR team and a confirmation email to the applicant
 
     // Return success response
     return NextResponse.json({

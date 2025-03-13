@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ChevronDown, ChevronRight } from 'lucide-react'
+import { Menu, ChevronDown, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -99,13 +99,13 @@ export default function SiteHeader() {
           {/* Logo - Left */}
           <div className="flex justify-start">
             <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
-                <Image
-                  src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
-                  alt="Cabinet Rmili & Associés"
-                  width={200}
-                  height={60}
-                  className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
-                />
+              <Image
+                src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
+                alt="Cabinet Rmili & Associés"
+                width={200}
+                height={60}
+                className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
+              />
             </Link>
           </div>
 
@@ -123,7 +123,7 @@ export default function SiteHeader() {
                     <div className="relative">
                       <button
                         className={cn(
-                          "flex items-center px-6 py-2 text-sm font-medium transition-all duration-200 relative whitespace-nowrap",
+                          "flex items-center px-2 py-2 text-sm font-medium transition-all duration-200 relative whitespace-nowrap",
                           !scrolled ? "text-white" : "text-gray-800",
                           activeDropdown === item.name && (!scrolled ? "text-[#cca234]" : "text-[#233b5d]"),
                         )}
@@ -201,8 +201,8 @@ export default function SiteHeader() {
             </nav>
           </div>
 
-          {/* Button - Right */}
-          <div className="flex justify-end">
+          {/* Button and Image - Right */}
+          <div className="flex justify-end items-center space-x-4">
             <Button
               asChild
               className={cn(
@@ -215,7 +215,7 @@ export default function SiteHeader() {
                   Devis Gratuit
                   <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
-                <span 
+                <span
                   className={cn(
                     "absolute inset-0 w-full h-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500",
                     scrolled ? "bg-[#cca234]" : "bg-[#233b5d]",
@@ -223,6 +223,15 @@ export default function SiteHeader() {
                 ></span>
               </Link>
             </Button>
+            <div className="relative transition-all duration-300">
+              <Image
+                src={scrolled ? "/oecmaroc.png" : "/oecmaroc.png"}
+                alt="Cabinet Rmili & Associés"
+                width={40}
+                height={40}
+                className={cn("w-auto transition-all duration-300", scrolled ? "h-10" : "h-12")}
+              />
+            </div>
           </div>
         </div>
 
@@ -230,119 +239,136 @@ export default function SiteHeader() {
         <div className="flex lg:hidden items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-10 transition-all duration-300 hover:opacity-90">
-              <Image
-                src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
-                alt="Cabinet Rmili & Associés"
-                width={200}
-                height={60}
-                className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
-              />
+            <Image
+              src={scrolled ? "/rmililogo1.png" : "/rmililogo2.png"}
+              alt="Cabinet Rmili & Associés"
+              width={200}
+              height={60}
+              className={cn("w-auto transition-all duration-300", scrolled ? "h-12" : "h-14")}
+            />
           </Link>
 
-          {/* Mobile Menu Button */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn("transition-all duration-300", !scrolled && "text-white hover:text-[#cca234]")}
-              >
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
+          {/* Mobile Header Right Side */}
+          <div className="flex items-center space-x-3">
+            {/* Header Icon */}
+            <div className="relative transition-all duration-300">
+              <Image
+                src={scrolled ? "/oecmaroc.png" : "/oecmaroc.png"}
+                alt="Cabinet Rmili & Associés"
+                width={30}
+                height={30}
+                className="w-auto h-8"
+              />
+            </div>
 
-            {/* Mobile Menu Content */}
-            <SheetContent side="right" className="w-full max-w-xs p-0">
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between p-4 border-b">
-                  <Image
-                    src="/rmililogo1.png"
-                    alt="Cabinet Rmili & Associés"
-                    width={150}
-                    height={45}
-                    className="h-8 w-auto"
-                  />
-                </div>
+            {/* Mobile Menu Button */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn("transition-all duration-300", !scrolled && "text-white hover:text-[#cca234]")}
+                >
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
 
-                <div className="flex-1 overflow-auto py-4">
-                  <nav className="flex flex-col space-y-1 px-2">
-                    {navItems.map((item) => (
-                      <div key={item.name}>
-                        {item.dropdown ? (
-                          <>
-                            <button
-                              onClick={() => toggleMobileExpanded(item.name)}
-                              className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-medium rounded-md transition-colors hover:text-[#233b5d]"
+              {/* Mobile Menu Content */}
+              <SheetContent side="right" className="w-full max-w-xs p-0">
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center justify-between p-4 border-b">
+                    <Image
+                      src="/rmililogo1.png"
+                      alt="Cabinet Rmili & Associés"
+                      width={150}
+                      height={45}
+                      className="h-8 w-auto"
+                    />
+                  </div>
+
+                  <div className="flex-1 overflow-auto py-4">
+                    <nav className="flex flex-col space-y-1 px-2">
+                      {navItems.map((item) => (
+                        <div key={item.name}>
+                          {item.dropdown ? (
+                            <>
+                              <button
+                                onClick={() => toggleMobileExpanded(item.name)}
+                                className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-medium rounded-md transition-colors hover:text-[#233b5d]"
+                              >
+                                {item.name}
+                                <ChevronRight
+                                  className={cn(
+                                    "h-4 w-4 transition-transform duration-200",
+                                    mobileExpanded === item.name && "rotate-90",
+                                  )}
+                                />
+                              </button>
+
+                              <AnimatePresence>
+                                {mobileExpanded === item.name && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="pl-4 pr-2 py-2 space-y-1">
+                                      {item.items?.map((subItem) => (
+                                        <Link
+                                          key={subItem.name}
+                                          href={subItem.href}
+                                          className="block px-3 py-2 text-sm rounded-md transition-colors hover:text-[#233b5d] relative pl-5"
+                                          onClick={() => setIsOpen(false)}
+                                        >
+                                          <span className="absolute left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#cca234]"></span>
+                                          {subItem.name}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              className="block px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-[#233b5d]"
+                              onClick={() => setIsOpen(false)}
                             >
                               {item.name}
-                              <ChevronRight
-                                className={cn(
-                                  "h-4 w-4 transition-transform duration-200",
-                                  mobileExpanded === item.name && "rotate-90",
-                                )}
-                              />
-                            </button>
+                            </Link>
+                          )}
+                        </div>
+                      ))}
+                    </nav>
+                  </div>
 
-                            <AnimatePresence>
-                              {mobileExpanded === item.name && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.2 }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="pl-4 pr-2 py-2 space-y-1">
-                                    {item.items?.map((subItem) => (
-                                      <Link
-                                        key={subItem.name}
-                                        href={subItem.href}
-                                        className="block px-3 py-2 text-sm rounded-md transition-colors hover:text-[#233b5d] relative pl-5"
-                                        onClick={() => setIsOpen(false)}
-                                      >
-                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#cca234]"></span>
-                                        {subItem.name}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </>
-                        ) : (
-                          <Link
-                            href={item.href}
-                            className="block px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-[#233b5d]"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            {item.name}
-                          </Link>
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                  <div className="p-4 border-t">
+                    <Button
+                      asChild
+                      className="w-full bg-[#233b5d] text-white transition-all duration-300 relative overflow-hidden group shadow-md hover:shadow-lg"
+                    >
+                      <Link href="/devis" onClick={() => setIsOpen(false)}>
+                        <span className="relative z-10 flex items-center justify-center">
+                          Devis Gratuit
+                          <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+                            →
+                          </span>
+                        </span>
+                        <span className="absolute inset-0 w-full h-full bg-[#cca234] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
-
-                <div className="p-4 border-t">
-                  <Button
-                    asChild
-                    className="w-full bg-[#233b5d] text-white transition-all duration-300 relative overflow-hidden group shadow-md hover:shadow-lg"
-                  >
-                    <Link href="/devis" onClick={() => setIsOpen(false)}>
-                      <span className="relative z-10 flex items-center justify-center">
-                        Devis Gratuit
-                        <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
-                      </span>
-                      <span className="absolute inset-0 w-full h-full bg-[#cca234] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
   )
 }
+
